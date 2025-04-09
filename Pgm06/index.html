@@ -1,88 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Password Strength Checker</title>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Password Strength Checker</title>
 
-  <!-- jQuery CDN -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <!-- jQuery CDN -->
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-  <!-- CSS Styles -->
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 50px;
-    }
+     <!-- CSS Styles -->
+     <style>
+          body {
+               font-family: Arial, sans-serif;
+               text-align: center;
+               margin: 50px;
+          }
 
-    input {
-      padding: 10px;
-      font-size: 16px;
-    }
+          input {
+               padding: 10px;
+               font-size: 16px;
+          }
 
-    #strength {
-      margin-top: 10px;
-      font-weight: bold;
-    }
+          #strength {
+               margin-top: 10px;
+               font-weight: bold;
+          }
 
-    .weak {
-      color: red;
-    }
+          .weak {
+               color: red;
+          }
 
-    .medium {
-      color: orange;
-    }
+          .medium {
+               color: orange;
+          }
 
-    .strong {
-      color: green;
-    }
-  </style>
+          .strong {
+               color: green;
+          }
+     </style>
 </head>
 
 <body>
 
-  <h2>Password Strength Checker</h2>
+     <h2>Password Strength Checker</h2>
 
-  <!-- Password input box -->
-  <input type="password" id="password" placeholder="Enter your password">
+     <!-- Password input box -->
+     <input type="password" id="password" placeholder="Enter your password">
 
-  <!-- Strength message will appear here -->
-  <p id="strength"></p>
+     <!-- Strength message will appear here -->
+     <p id="strength"></p>
 
-  <!-- jQuery Script -->
-  <script>
-    $(document).ready(function () {
-      $("#password").on("input", function () {
-        var password = $(this).val();
-        var strengthText = $("#strength");
+     <!-- jQuery Script -->
+     <script>
+          $(document).ready(function () {
+               $("#password").on("input", function () {
+                    var password = $(this).val();
+                    var strengthText = $("#strength");
 
-        // Clear if empty
-        if (password.length === 0) {
-          strengthText.text("").removeClass();
-          return;
-        }
+                    // Clear if empty
+                    if (password.length === 0) {
+                         strengthText.text("").removeClass();
+                         return;
+                    }
 
-        var strength = 0;
+                    var strength = 0;
 
-        // Check password rules
-        if (password.length >= 6) strength++;
-        if (/[A-Z]/.test(password)) strength++;
-        if (/[a-z]/.test(password)) strength++;
-        if (/[0-9]/.test(password)) strength++;
-        if (/[\W]/.test(password)) strength++;
+                    // Check password rules
+                    if (password.length >= 6) strength++;
+                    if (/[A-Z]/.test(password)) strength++;
+                    if (/[a-z]/.test(password)) strength++;
+                    if (/[0-9]/.test(password)) strength++;
+                    if (/[\W]/.test(password)) strength++;
 
-        // Display result
-        if (strength <= 2) {
-          strengthText.text("Weak").removeClass().addClass("weak");
-        } else if (strength <= 4) {
-          strengthText.text("Medium").removeClass().addClass("medium");
-        } else {
-          strengthText.text("Strong").removeClass().addClass("strong");
-        }
-      });
-    });
-  </script>
+                    // Display result
+                    if (strength <= 2) {
+                         strengthText.text("Weak").removeClass().addClass("weak");
+                    } else if (strength <= 4) {
+                         strengthText.text("Medium").removeClass().addClass("medium");
+                    } else {
+                         strengthText.text("Strong").removeClass().addClass("strong");
+                    }
+               });
+          });
+     </script>
 
 </body>
+
 </html>
