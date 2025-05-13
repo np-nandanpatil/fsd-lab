@@ -7,7 +7,7 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (email === "ramakalyaniphd@gmail.com" && password === "Kalyani@123") {
+    if (email === "nandan@gmail.com" && password === "Nandan@123") {
       setMessage("Login Successful!");
     } else {
       setMessage("Invalid Credentials!");
