@@ -1,39 +1,28 @@
-import React, { useState, useEffect } from "react";
-import db from "./firebase";
-import { collection, addDoc, deleteDoc, doc, updateDoc, onSnapshot } from "firebase/firestore";
-import "./App.css";
+import { useState, useEffect } from "react";
+import { db} from "./firebase";
+import { collection, addDoc, deleteDoc, doc, onSnapshot, updateDoc } from "firebase/firestore";
 
 export default function App() {
-  const [todos, setTodos] = useState([]);
-  const [input, setInput] = useState("");
+  const [todos, setTodos] = useState([]), 
+  [text, setText] = useState("");
 
-  useEffect(() =>
-    onSnapshot(collection(db, "todos"), snap =>
-      setTodos(snap.docs.map(doc => ({ id: doc.id, ...doc.data() })))
-    ), []);
+  useEffect(() => onSnapshot(collection(db, "todos"), snap =>
+    setTodos(snap.docs.map(d => ({ id: d.id, ...d.data() })))), []);
 
-  const addTodo = async () => {
-    if (input.trim()) {
-      await addDoc(collection(db, "todos"), { text: input, completed: false });
-      setInput("");
-    }
-  };
-
-  const handleUpdate = (id, data) => updateDoc(doc(db, "todos", id), data);
-  const handleDelete = id => deleteDoc(doc(db, "todos", id));
+  const add = () => text && addDoc(collection(db, "todos"), { text, completed: false }).then(() => setText(""));
+  const toggle = (id, done) => updateDoc(doc(db, "todos", id), { completed: !done });
+  const del = id => deleteDoc(doc(db, "todos", id));
 
   return (
-    <div className="container">
-      <h1>Firebase To-Do App</h1>
-      <div className="input-section">
-        <input value={input} onChange={e => setInput(e.target.value)} placeholder="Add a task..." />
-        <button onClick={addTodo}>Add</button>
-      </div>
-      <ul className="todo-list">
-        {todos.map(({ id, text, completed }) => (
-          <li key={id} className={completed ? "completed" : ""}>
-            <span onClick={() => handleUpdate(id, { completed: !completed })}>{text}</span>
-            <button onClick={() => handleDelete(id)}>❌</button>
+    <div>
+      <h1>Todo</h1>
+      <input value={text} onChange={e => setText(e.target.value)} />
+      <button onClick={add}>Add</button>
+      <ul>
+        {todos.map(t => (
+          <li key={t.id} style={{ cursor: "pointer", textDecoration: t.completed ? "line-through" : "" }}>
+            <span onClick={() => toggle(t.id, t.completed)}>{t.text}</span>
+            <button onClick={() => del(t.id)}>❌</button>
           </li>
         ))}
       </ul>
