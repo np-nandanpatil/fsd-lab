@@ -1,68 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Star Rating System</title>
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-     <style>
-          body {
-               font-family: Arial, sans-serif;
-               text-align: center;
-               margin: 50px;
-          }
-
-          .stars {
-               font-size: 30px;
-               cursor: pointer;
-               color: gray;
-          }
-
-          .stars .star {
-               padding: 5px;
-          }
-
-          .selected,
-          .highlight {
-               color: gold;
-          }
-     </style>
+  <title>Star Rating</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    .star {
+      font-size: 30px;
+      cursor: pointer;
+      color: gray;
+    }
+    .star.selected {
+      color: gold;
+    }
+  </style>
 </head>
-
 <body>
-     <h2>Star Rating System</h2>
-     <div class="stars">
-          <span class="star" data-rating="1">&#9733;</span>
-          <span class="star" data-rating="2">&#9733;</span>
-          <span class="star" data-rating="3">&#9733;</span>
-          <span class="star" data-rating="4">&#9733;</span>
-          <span class="star" data-rating="5">&#9733;</span>
-     </div>
-     <p id="ratingValue">Rating: 0</p>
-     <script>
-          $(document).ready(function () {
-               let selectedRating = 0;
-               $(".star").hover(
-                    function () {
-                         let rating = $(this).data("rating");
-                         $(".star").each(function () {
-                              $(this).toggleClass("highlight", $(this).data("rating") <= rating);
-                         });
-                    },
-                    function () {
-                         $(".star").removeClass("highlight");
-                    }
-               );
-               $(".star").click(function () {
-                    selectedRating = $(this).data("rating");
-                    $("#ratingValue").text("Rating: " + selectedRating);
-                    $(".star").each(function () {
-                         $(this).toggleClass("selected", $(this).data("rating") <= selectedRating);
-                    });
-               });
-          });
-     </script>
-</body>
+  <h2>Rate Us</h2>
+  <div id="stars">
+    <span class="star">&#9733;</span>
+    <span class="star">&#9733;</span>
+    <span class="star">&#9733;</span>
+    <span class="star">&#9733;</span>
+    <span class="star">&#9733;</span>
+  </div>
+  <p id="rating">Rating: 0</p>
 
+  <script>
+    $(function () {
+      $(".star").click(function () {
+        const index = $(this).index() + 1;
+        $("#rating").text("Rating: " + index);
+        $(".star").removeClass("selected").slice(0, index).addClass("selected");
+      });
+    });
+  </script>
+</body>
 </html>

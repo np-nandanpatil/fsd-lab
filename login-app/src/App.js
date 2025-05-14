@@ -7,47 +7,29 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (email === "nandan@gmail.com" && password === "Nandan@123") {
-      setMessage("Login Successful!");
-    } else {
-      setMessage("Invalid Credentials!");
+    if (email === "nandan@gmail.com" && password === "123456") {
+      setMessage("Login successful!");
     }
-  };
+    else {
+      setMessage("Invalid email or password.");
+    }
+  }
 
   return (
-    <div className="p-6 max-w-md mx-auto bg-white rounded-xl shadow-md space-y-4">
-      <h1 className="text-xl font-bold text-center">Login Form</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block">Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-2 border rounded"
-            required
-          />
-        </div>
-        <div>
-          <label className="block">Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-2 border rounded"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-        >
-          Login
-        </button>
+    <div>
+      <h1>Login Form</h1>
+      <form onSubmit={handleSubmit}>
+        <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)}></input>
+        <br/>
+        <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)}></input>
+        <br/>
+        <button type="submit">Login</button>
+        {message && <p>{message}</p>}
       </form>
-      {message && <p className="text-center mt-2 font-bold">{message}</p>}
     </div>
-  );
+  )
+
+
 };
 
 export default LoginForm;
