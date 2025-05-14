@@ -7,10 +7,10 @@
     .star {
       font-size: 30px;
       cursor: pointer;
-      color: gray;
+      color: grey;
     }
     .star.selected {
-      color: gold;
+      color: rgb(255, 217, 0);
     }
   </style>
 </head>
@@ -26,13 +26,13 @@
   <p id="rating">Rating: 0</p>
 
   <script>
-    $(function () {
-      $(".star").click(function () {
-        const index = $(this).index() + 1;
-        $("#rating").text("Rating: " + index);
-        $(".star").removeClass("selected").slice(0, index).addClass("selected");
-      });
-    });
+    $ (function () {
+     $(".star").click( function () {
+          const index = $(this).index() + 1
+          $("#rating").text("Rating: " + index)
+          $(".star").removeClass("selected").slice(0,index).addClass("selected")
+     })
+    })
   </script>
 </body>
 </html>
