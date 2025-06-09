@@ -54,4 +54,4 @@
  </div>
  );
  };
- exportdefaultCalculator;
+ export default Calculator;
