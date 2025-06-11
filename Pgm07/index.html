@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Star Rating</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -9,11 +10,13 @@
       cursor: pointer;
       color: grey;
     }
+
     .star.selected {
       color: rgb(255, 217, 0);
     }
   </style>
 </head>
+
 <body>
   <h2>Rate Us</h2>
   <div id="stars">
@@ -26,13 +29,14 @@
   <p id="rating">Rating: 0</p>
 
   <script>
-    $ (function () {
-     $(".star").click( function () {
-          const index = $(this).index() + 1
-          $("#rating").text("Rating: " + index)
-          $(".star").removeClass("selected").slice(0,index).addClass("selected")
-     })
+    $(function () {
+      $(".star").click(function () {
+        const index = $(this).index() + 1
+        $("#rating").text("Rating: " + index)
+        $(".star").removeClass("selected").slice(0, index).addClass("selected")
+      })
     })
   </script>
 </body>
+
 </html>
