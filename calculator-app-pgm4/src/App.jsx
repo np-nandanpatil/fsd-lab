@@ -1,56 +1,68 @@
-// App.jsx
-import React, { useState } from 'react';
-import './App.css';
-const Calculator = () => {
-  const [input, setInput] = useState('');
-  const [result, setResult] = useState('');
-  const handleClick = (value) => {
-    if (value === '=') {
+import { useState } from "react";
+
+function App() {
+  const [input, setInput] = useState("");
+  const [result, setResult] = useState("");
+
+  const buttons = ["1", "2", "3", "+", "4", "5", "6", "-", "7", "8", "9", "*", "clr", "0", "="];
+
+  const handleClick = (val) => {
+    if (val === "=") {
       try {
-        const evalResult = eval(input);
-        setResult(evalResult);
-        setInput('');
+        setResult(eval(input).toString());
+        setInput("");
+      } catch {
+        setResult("Error");
+        setInput("");
       }
-      catch(error) {
-        setResult('Math Error');
-        setInput('');
-      }
-    } else if (value === 'Clear') {
-      setInput('');
-      setResult('');
+    } else if (val === "clr") {
+      setInput("");
+      setResult("");
     } else {
-      setInput((prev) => prev + value);
+      setInput(input + val);
     }
   };
+
+  const styles = {
+    container: {
+      width: "220px",
+      margin: "50px auto",
+      textAlign: "center",
+      fontFamily: "Arial, sans-serif"
+    },
+    inputBox: {
+      width: "100%",
+      height: "30px",
+      marginBottom: "10px",
+      textAlign: "right",
+      fontSize: "16px"
+    },
+    grid: {
+      display: "grid",
+      gridTemplateColumns: "repeat(4, 1fr)",
+      gap: "10px"
+    },
+    button: {
+      padding: "15px",
+      fontSize: "16px",
+      cursor: "pointer"
+    }
+  };
+
   return (
-    <div className="calculator">
-      <h2>React Calculator</h2>
-      <div className="screen">
-        <input type="text" readOnly value={input} placeholder="0" />
-        <input type="text" readOnly value={result} placeholder="Result" />
-      </div>
-      <div className="button-row">
-        {['7', '8', '9', '/'].map((item) => (
-          <button key={item} onClick={() => handleClick(item)}>
-            {item}
+    <div style={styles.container}>
+      <h2>My Calculator</h2>
+      <input style={styles.inputBox} readOnly value={input} />
+      <input style={styles.inputBox} readOnly value={result} />
+      <div style={styles.grid}>
+        {buttons.map((val) => (
+          <button key={val} style={styles.button} onClick={() => handleClick(val)}>
+            {val}
           </button>
         ))}
-        {['4', '5', '6', '*'].map((item) => (
-          <button key={item} onClick={() => handleClick(item)}>
-            {item}
-          </button>
-        ))}
-        {['1', '2', '3', '-'].map((item) => (
-          <button key={item} onClick={() => handleClick(item)}>
-            {item}
-          </button>
-        ))}
-        <button onClick={() => handleClick('0')}>0</button>
-        <button onClick={() => handleClick('+')}>+</button>
-        <button className="equals" onClick={() => handleClick('=')}>=</button>
-        <button className="clear" onClick={() => handleClick('Clear')}>Clear</button>
       </div>
     </div>
   );
-};
-export default Calculator;
+}
+
+export default App;

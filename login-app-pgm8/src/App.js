@@ -3,33 +3,27 @@ import React, { useState } from "react";
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [msg, setMsg] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email === "nandan@gmail.com" && password === "123456") {
-      setMessage("Login successful!");
+      setMsg("Login successful!");
     }
     else {
-      setMessage("Invalid email or password.");
+      setMsg("Invalid email or password.");
     }
-  }
+  };
 
   return (
-    <div>
-      <h1>Login Form</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)}></input>
-        <br />
-        <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)}></input>
-        <br />
-        <button type="submit">Login</button>
-        {message && <p>{message}</p>}
-      </form>
-    </div>
-  )
-
-
+    <form onSubmit={handleSubmit} style={{ textAlign: "center" }}>
+      <h2>Login</h2>
+      <input type="email" placeholder="Email" required value={email} onChange={e => setEmail(e.target.value)} />
+      <input type="password" placeholder="Password" required value={password} onChange={e => setPassword(e.target.value)} />
+      <button type="submit">Login</button>
+      {msg && <p>{msg}</p>}
+    </form>
+  );
 };
 
 export default LoginForm;

@@ -60,7 +60,7 @@
 
                     // Clear if empty
                     if (password.length === 0) {
-                         strengthText.text("").removeClass();
+                         strengthText.text("").removeClass("weak medium strong");
                          return;
                     }
 
@@ -73,13 +73,16 @@
                     if (/[0-9]/.test(password)) strength++;
                     if (/[\W]/.test(password)) strength++;
 
-                    // Display result
+                    // Remove old class
+                    strengthText.removeClass("weak medium strong");
+
+                    // Display result and apply color
                     if (strength <= 2) {
-                         strengthText.text("Weak");
+                         strengthText.text("Weak").addClass("weak");
                     } else if (strength <= 4) {
-                         strengthText.text("Medium");
+                         strengthText.text("Medium").addClass("medium");
                     } else {
-                         strengthText.text("Strong");
+                         strengthText.text("Strong").addClass("strong");
                     }
                });
           });
