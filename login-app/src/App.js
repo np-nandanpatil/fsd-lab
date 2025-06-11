@@ -20,9 +20,9 @@ const LoginForm = () => {
       <h1>Login Form</h1>
       <form onSubmit={handleSubmit}>
         <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)}></input>
-        <br/>
+        <br />
         <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)}></input>
-        <br/>
+        <br />
         <button type="submit">Login</button>
         {message && <p>{message}</p>}
       </form>

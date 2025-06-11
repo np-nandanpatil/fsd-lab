@@ -7,8 +7,7 @@ function submitForm() {
      let email = document.getElementById("email").value;
 
      if (name && email) {
-          document.getElementById("message").innerText =
-               "Thank you, " + name + "! Your form has been submitted.";
+          document.getElementById("message").innerText = "Thank you, " + name + "! Your form has been submitted.";
           return false; // Prevent form from actually submitting
      }
 
